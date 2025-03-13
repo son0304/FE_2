@@ -1,38 +1,31 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Bánh Kem Dâu",
       "price": 250000,
       "description": "Bánh kem dâu tươi với lớp kem mịn và vị ngọt dịu.",
       "image": "https://picsum.photos/100/100"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Bánh Socola",
       "price": 280000,
       "description": "Bánh socola đậm vị, phủ ganache thơm ngon.",
       "image": "https://picsum.photos/100/100"
     },
     {
-      "id": 3,
-      "name": "Bánh Tiramisu",
-      "price": 300000,
-      "description": "Bánh tiramisu thơm lừng cà phê và kem mascarpone.",
+      "id": "2",
+      "name": "Bánh Socola",
+      "price": 280000,
+      "description": "Bánh socola đậm vị, phủ ganache thơm ngon.",
       "image": "https://picsum.photos/100/100"
     },
     {
-      "id": 4,
-      "name": "Bánh Trà Xanh",
-      "price": 270000,
-      "description": "Bánh kem vị trà xanh thơm dịu, thích hợp cho tín đồ matcha.",
-      "image": "https://picsum.photos/100/100"
-    },
-    {
-      "id": 5,
-      "name": "Bánh Phô Mai Chanh Dây",
-      "price": 310000,
-      "description": "Bánh phô mai béo mịn kết hợp với chanh dây chua nhẹ.",
+      "id": "2",
+      "name": "Bánh Socola",
+      "price": 280000,
+      "description": "Bánh socola đậm vị, phủ ganache thơm ngon.",
       "image": "https://picsum.photos/100/100"
     }
   ]

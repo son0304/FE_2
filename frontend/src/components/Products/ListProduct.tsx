@@ -7,6 +7,17 @@ const ProductList = () => {
       .then(response => response.json())
       .then(data => setProducts(data))
   }, [])
+
+  const onDelete = (id:number) => {
+    if(confirm("Xóa?")) {
+      fetch(`http://localhost:3000/products/${id}`, {
+        method: "DELETE"
+      }).then(() => setProducts(products.filter((item) => {
+        return item.id !== id;
+        alert('Thành công')
+      })))
+    }
+  }
   return (
     <>
 
@@ -26,7 +37,7 @@ const ProductList = () => {
         <tbody>
           {products.map((p: any) => {
             return (
-              <tr key={p.id}>
+              <tr key={Number(p.id)}>
                 <td>{p.id}</td>
                 <td>{p.name}</td>
                 <td>{p.price}</td>
@@ -34,7 +45,7 @@ const ProductList = () => {
                 <td><img src={p.image} alt="" /></td>
                 <td>
                   <button className='btn btn-primary'>Detail</button>
-                  <button className='btn btn-danger mx-2'>Delete</button>
+                  <button className='btn btn-danger mx-2' onClick={() => onDelete(p.id)}>Delete</button>
                   <button className='btn btn-success'>Update</button>
                 </td>
               </tr>
