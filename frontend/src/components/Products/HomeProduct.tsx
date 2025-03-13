@@ -1,10 +1,10 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-const ProductHome = () => {
+const HomeProduct = () => {
   return (
-   <Outlet/>
+    <Outlet/>
   )
 }
 
-export default ProductHome
+export default HomeProduct
