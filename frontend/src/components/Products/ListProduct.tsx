@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -8,13 +9,12 @@ const ProductList = () => {
       .then(data => setProducts(data))
   }, [])
 
-  const onDelete = (id:number) => {
-    if(confirm("Xóa?")) {
+  const onDelete = (id: number) => {
+    if (confirm("Xóa?")) {
       fetch(`http://localhost:3000/products/${id}`, {
         method: "DELETE"
       }).then(() => setProducts(products.filter((item) => {
         return item.id !== id;
-        alert('Thành công')
       })))
     }
   }
@@ -22,11 +22,12 @@ const ProductList = () => {
     <>
 
       <h1>Products List</h1>
-      <button className='btn btn-primary'>Create</button>
+      <Link to={'/admin/product/create'}>
+        <button className='btn btn-primary'>Create</button>
+      </Link>
       <table className='table'>
         <thead>
           <tr >
-            <th>Id</th>
             <th>Name</th>
             <th>price</th>
             <th>description</th>
@@ -38,7 +39,6 @@ const ProductList = () => {
           {products.map((p: any) => {
             return (
               <tr key={Number(p.id)}>
-                <td>{p.id}</td>
                 <td>{p.name}</td>
                 <td>{p.price}</td>
                 <td>{p.description}</td>
