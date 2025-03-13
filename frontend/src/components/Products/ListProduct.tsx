@@ -20,7 +20,6 @@ const ProductList = () => {
   }
   return (
     <>
-
       <h1>Products List</h1>
       <Link to={'/admin/product/create'}>
         <button className='btn btn-primary'>Create</button>
@@ -46,7 +45,9 @@ const ProductList = () => {
                 <td>
                   <button className='btn btn-primary'>Detail</button>
                   <button className='btn btn-danger mx-2' onClick={() => onDelete(p.id)}>Delete</button>
+                  <Link to={`/admin/product/update/${p.id}`}>
                   <button className='btn btn-success'>Update</button>
+                  </Link>
                 </td>
               </tr>
             )

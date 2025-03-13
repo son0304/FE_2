@@ -2,8 +2,8 @@
   "products": [
     {
       "id": "1",
-      "name": "Bánh Kem Dâu",
-      "price": 250000,
+      "name": "Bánh Kem Dâu 1",
+      "price": "25000",
       "description": "Bánh kem dâu tươi với lớp kem mịn và vị ngọt dịu.",
       "image": "https://picsum.photos/100/100"
     },
@@ -31,8 +31,8 @@
     {
       "id": "2e77",
       "description": "Ngon",
-      "name": "Chocopie",
-      "price": "2000",
+      "name": "Chocopie 2",
+      "price": "3000",
       "image": "https://picsum.photos/100/100"
     }
   ]
