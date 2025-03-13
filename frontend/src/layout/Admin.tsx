@@ -15,7 +15,7 @@ const Admin = () => {
             <Link className="nav-link text-white" to="/admin/users">Quản lý người dùng</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/admin/products">Quản lý sản phẩm</Link>
+            <Link className="nav-link text-white" to="/admin/product">Quản lý sản phẩm</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link text-white" to="/">Quay về Client</Link>
