@@ -43,10 +43,12 @@ const ProductList = () => {
                 <td>{p.description}</td>
                 <td><img src={p.image} alt="" /></td>
                 <td>
-                  <button className='btn btn-primary'>Detail</button>
+                  <Link to={`/admin/product/detail/${p.id}`}>
+                    <button className='btn btn-primary'>Detail</button>
+                  </Link>
                   <button className='btn btn-danger mx-2' onClick={() => onDelete(p.id)}>Delete</button>
                   <Link to={`/admin/product/update/${p.id}`}>
-                  <button className='btn btn-success'>Update</button>
+                    <button className='btn btn-success'>Update</button>
                   </Link>
                 </td>
               </tr>
