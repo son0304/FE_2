@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { IProduct } from '../../interface/IProduct';
 
 const CreateProduct = () => {
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
 
   const [input, setInput] = useState({});
   const navigate = useNavigate();
