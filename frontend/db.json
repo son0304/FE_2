@@ -23,17 +23,20 @@
     },
     {
       "id": "4",
-      "name": "Bánh Socola",
-      "price": 280000,
+      "name": "Bánh Soco",
+      "price": "28000",
       "description": "Bánh socola đậm vị, phủ ganache thơm ngon.",
       "image": "https://picsum.photos/100/100"
     },
     {
-      "id": "2e77",
-      "description": "Ngon",
-      "name": "Chocopie 2",
-      "price": "3000",
+      "id": "9e89",
+      "name": "chôcpie",
+      "price": "10000",
+      "description": "ngọt",
       "image": "https://picsum.photos/100/100"
     }
+  ],
+  "users" : [
+    
   ]
 }
