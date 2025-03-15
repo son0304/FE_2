@@ -1,13 +1,6 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "Bánh Kem Dâu 1",
-      "price": "25000",
-      "description": "Bánh kem dâu tươi với lớp kem mịn và vị ngọt dịu.",
-      "image": "https://picsum.photos/100/100"
-    },
-    {
       "id": "2",
       "name": "Bánh Socola",
       "price": 280000,
@@ -29,11 +22,11 @@
       "image": "https://picsum.photos/100/100"
     },
     {
-      "id": "2e77",
-      "description": "Ngon",
-      "name": "Chocopie 2",
-      "price": "3000",
-      "image": "https://picsum.photos/100/100"
+      "id": "3bcd",
+      "name": "C Trang",
+      "price": "123",
+      "description": "2234",
+      "image": "https://picsum.photos/200/120"
     }
   ]
 }
