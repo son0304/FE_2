@@ -1,63 +1,105 @@
+<<<<<<< HEAD
 import  { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+=======
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Table, Button, Popconfirm, message } from "antd";
+import { IProduct } from "../../interface/IProduct";
 
-const ProductList = () => {
-  const [products, setProducts] = useState([]);
+const ProductList: React.FC = () => {
+  const [products, setProducts] = useState<IProduct[]>([]);
+>>>>>>> f7f8b10aace008295b269f1fa771305d2f35e161
+
   useEffect(() => {
-    fetch(`http://localhost:3000/products`)
-      .then(response => response.json())
-      .then(data => setProducts(data))
-  }, [])
+    fetch("http://localhost:3000/products")
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
 
-  const onDelete = (id: number) => {
-    if (confirm("Xóa?")) {
-      fetch(`http://localhost:3000/products/${id}`, {
-        method: "DELETE"
-      }).then(() => setProducts(products.filter((item) => {
-        return item.id !== id;
-      })))
-    }
-  }
+  const onDelete = (id: string) => {
+    fetch(`http://localhost:3000/products/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      setProducts(products.filter((item) => item.id !== id));
+      message.success("Xóa sản phẩm thành công!");
+    });
+  };
+
+  const columns = [
+
+    {
+      title: "Id",//Tên cột
+      dataIndex: "id",//tên biến
+      key: "id",//Value
+    },
+    {
+      title: "Tên sản phẩm",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Giá",
+      dataIndex: "price",
+      key: "price",
+      render: (price: number) => `${price.toLocaleString()} VND`,
+    },
+    {
+      title: "Mô tả",
+      dataIndex: "description",
+      key: "description",
+    },
+    {
+      title: "Hình ảnh",
+      dataIndex: "image",
+      key: "image",
+      render: (image: string) => <img src={image} alt="product" width={50} />,
+    },
+    {
+      title: "Hành động",
+      key: "action",
+      render: (record: IProduct) => (
+        <>
+          <Link to={`/admin/product/detail/${record.id}`}>
+            <Button type="primary" size="small" className="mx-1">
+              Chi tiết
+            </Button>
+          </Link>
+
+          <Popconfirm
+            title="Bạn có chắc chắn muốn xóa sản phẩm này?"
+            onConfirm={() => onDelete(record.id)}
+            okText="Xóa"
+            cancelText="Hủy"
+          >
+            <Button danger size="small" className="mx-1">
+              Xóa
+            </Button>
+          </Popconfirm>
+
+          <Link to={`/admin/product/update/${record.id}`}>
+            <Button type="dashed" size="small" className="mx-1">
+              Cập nhật
+            </Button>
+          </Link>
+        </>
+      ),
+    },
+  ];
+
   return (
-    <>
-      <h1>Products List</h1>
-      <Link to={'/admin/product/create'}>
-        <button className='btn btn-primary'>Create</button>
-      </Link>
-      <table className='table'>
-        <thead>
-          <tr >
-            <th>Name</th>
-            <th>price</th>
-            <th>description</th>
-            <th>image</th>
-            <th className=' col-3'>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((p: any) => {
-            return (
-              <tr key={Number(p.id)}>
-                <td>{p.name}</td>
-                <td>{p.price}</td>
-                <td>{p.description}</td>
-                <td><img src={p.image} alt="" /></td>
-                <td>
-                  <Link to={`/admin/product/detail/${p.id}`}>
-                    <button className='btn btn-primary'>Detail</button>
-                  </Link>
-                  <button className='btn btn-danger mx-2' onClick={() => onDelete(p.id)}>Delete</button>
-                  <Link to={`/admin/product/update/${p.id}`}>
-                    <button className='btn btn-success'>Update</button>
-                  </Link>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    </>
-  )
-}
+    <div style={{ padding: "20px", maxWidth: "2000px", margin: "0 auto" }}>
+      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Danh Sách Sản Phẩm</h1>
 
-export default ProductList
+      <Link to={"/admin/product/create"}>
+        <Button type="primary" style={{ marginBottom: "10px" }}>
+          Thêm Sản Phẩm
+        </Button>
+      </Link>
+
+      <Table dataSource={products} columns={columns} rowKey="id" pagination={{ pageSize: 5 }} />
+    </div>
+  );
+};
+
+export default ProductList;

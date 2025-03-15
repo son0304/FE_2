@@ -1,41 +1,61 @@
 import React from "react";
+import { Layout, Menu } from "antd";
 import { Link, Outlet } from "react-router-dom";
+import { DashboardOutlined, UserOutlined, ShoppingCartOutlined, HomeOutlined } from "@ant-design/icons";
 
-const Admin = () => {
+const { Header, Sider, Content } = Layout;
+
+const Admin: React.FC = () => {
   return (
-    <div className="d-flex vh-100">
+    <Layout style={{ minHeight: "100vh" }}>
       {/* Sidebar */}
-      <div className="bg-dark text-white p-3 vh-100" style={{ width: "250px" }}>
-        <h4 className="fw-bold text-center">Admin Panel</h4>
-        <ul className="nav flex-column mt-4">
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/admin/dashboard">Dashboard</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/admin/users">Quản lý người dùng</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/admin/product">Quản lý sản phẩm</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/">Quay về Client</Link>
-          </li>
-        </ul>
-      </div>
+      <Sider theme="dark" width={250}>
+        <div className="logo" style={{ textAlign: "center", padding: "16px", color: "#fff", fontSize: "18px", fontWeight: "bold" }}>
+          Admin Panel
+        </div>
+        <Menu
+  theme="dark"
+  mode="inline"
+  defaultSelectedKeys={["dashboard"]}
+  items={[
+    {
+      key: "dashboard",
+      icon: <DashboardOutlined />,
+      label: <Link to="/admin/dashboard">Dashboard</Link>,
+    },
+    {
+      key: "users",
+      icon: <UserOutlined />,
+      label: <Link to="/admin/users">Quản lý người dùng</Link>,
+    },
+    {
+      key: "products",
+      icon: <ShoppingCartOutlined />,
+      label: <Link to="/admin/product">Quản lý sản phẩm</Link>,
+    },
+    {
+      key: "client",
+      icon: <HomeOutlined />,
+      label: <Link to="/">Quay về Client</Link>,
+    },
+  ]}
+/>
+
+      </Sider>
 
       {/* Nội dung chính */}
-      <div className="flex-grow-1">
+      <Layout>
         {/* Navbar */}
-        <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
-          <span className="navbar-brand fw-bold">Admin Dashboard</span>
-        </nav>
+        <Header style={{ background: "#fff", padding: "0 20px", fontWeight: "bold", fontSize: "18px" }}>
+          Admin Dashboard
+        </Header>
 
-        {/* NỘI DUNG CHÍNH SẼ THAY ĐỔI Ở ĐÂY */}
-        <div className="p-4">
+        {/* Nội dung thay đổi ở đây */}
+        <Content style={{ margin: "20px", padding: "20px", background: "#fff", borderRadius: "8px" }}>
           <Outlet />
-        </div>
-      </div>
-    </div>
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 
