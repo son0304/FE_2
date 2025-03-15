@@ -24,19 +24,11 @@
   ],
   "users": [
     {
-<<<<<<< HEAD
       "id": "1",
       "username": "admin",
       "email": "admin@gmail.com",
       "password": "123456",
       "role": "admin"
-=======
-      "id": "3bcd",
-      "name": "C Trang",
-      "price": "123",
-      "description": "2234",
-      "image": "https://picsum.photos/200/120"
->>>>>>> f7f8b10aace008295b269f1fa771305d2f35e161
     }
   ]
 }

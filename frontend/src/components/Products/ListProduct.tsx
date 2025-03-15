@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-import  { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-=======
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Table, Button, Popconfirm, message } from "antd";
@@ -9,7 +6,6 @@ import { IProduct } from "../../interface/IProduct";
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
->>>>>>> f7f8b10aace008295b269f1fa771305d2f35e161
 
   useEffect(() => {
     fetch("http://localhost:3000/products")
