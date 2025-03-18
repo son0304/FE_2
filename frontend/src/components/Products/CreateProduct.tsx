@@ -1,69 +1,54 @@
-import React, {  useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Button, Form, InputNumber, message } from 'antd';
 import { IProduct } from '../../interface/IProduct';
+import Input from 'antd/es/input/Input';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useMutation } from '@tanstack/react-query';
 
-const CreateProduct = () => {
+function CreateProduct() {
 
-  const [products, setProducts] = useState<IProduct[]>([]);
-
-  const [input, setInput] = useState({});
   const navigate = useNavigate();
 
-  const inputData = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-    // console.log({ name, value });
-
+  const newProduct = async(data: IProduct) =>{
+    await axios.post(`http://localhost:3000/products`, data);
   }
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    fetch(`http://localhost:3000/products`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(input),
-    })
-      .then((response) => response.json())
-      .then((data) => setProducts([...products, data]))
-      .then(() => navigate("/admin/product"));
-
+  const {mutate} = useMutation({
+    mutationFn: newProduct,
+    onSuccess: () => {
+      message.success("Create product successfully");
+      navigate("/admin/product")
+    },
+    onError: () => {
+      message.error("Create product failed");
+    }
+  })
+  function onFinish(values: IProduct) {
+    mutate(values);
+    
   }
-  return (
-    <div className="container">
-      <h1>Create Product</h1>
+    return (
+      <>
+        <h1>Create Product</h1>
+        <Form onFinish={onFinish}>
+          <Form.Item name="name" label="Name" rules={[{ required: true, message: 'Please input your name!' }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="price" label="Price" rules={[{ required: true, message: 'Please input your price!' }, { type: 'number', min: 0 }]}>
+            <InputNumber />
+          </Form.Item>
+          <Form.Item name="description" label="Description" rules={[{ required: true, message: 'Please input your description!' }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="image" label="Image" rules={[{ required: true, message: 'Please input your image!' }]}>
+            <Input />
+          </Form.Item>
+          <Button htmlType='submit'>Create</Button>
+        </Form>
+      </>
+    )
+  
 
-      <div className="card-body">
-        <form className="form" onSubmit={onSubmit}>
-          <div className="row">
-            <div className="col-6 mt-2">
-              <label htmlFor="">Name</label>
-              <input type="text" name="name" className="form-control" onInput={inputData} />
-            </div>
-            <div className="col-6 mt-2">
-              <label htmlFor="">Price</label>
-              <input type="number" name="price" className="form-control" onInput={inputData} />
-            </div>
-            <div className="col-6 mt-2">
-              <label htmlFor="">Description</label>
-              <input type="text" name="description" className="form-control" onInput={inputData} />
-            </div>
-            <div className="col-6 mt-2">
-              <label htmlFor="">Image</label>
-              <input type="text" name="image" className="form-control" onInput={inputData} />
-            </div>
-          </div>
-          <div className="col-12 mt-2 text-center">
-            <button className='btn btn-primary m-2' type='submit'>Create</button>
-          </div>
-        </form>
-      </div>
-
-    </div>
-
-  )
 }
 
-export default CreateProduct
+export default CreateProduct;

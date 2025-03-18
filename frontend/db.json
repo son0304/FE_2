@@ -21,25 +21,5 @@
       "description": "Bánh socola đậm vị, phủ ganache thơm ngon.",
       "image": "https://picsum.photos/100/100"
     }
-  ],
-  "users": [
-    {
-<<<<<<< HEAD
-      "id": "1",
-      "username": "admin",
-      "email": "admin@gmail.com",
-      "password": "123456",
-      "role": "admin"
-=======
-      "id": "3bcd",
-      "name": "C Trang",
-      "price": "123",
-      "description": "2234",
-      "image": "https://picsum.photos/200/120"
-    },
-    {
-      "id": "1815"
->>>>>>> 37507c6fd98164cd9f1ce313fcedf61a36c9cfe1
-    }
   ]
 }

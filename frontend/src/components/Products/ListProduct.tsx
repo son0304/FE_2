@@ -1,17 +1,9 @@
-<<<<<<< HEAD
 
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Table, Button, Popconfirm, message } from "antd";
+import { Table, Button, Image } from "antd";
 import { IProduct } from "../../interface/IProduct";
-=======
-import React from 'react';
-import { Button, Table } from 'antd';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { IProduct } from '../../interface/IProduct';
-import { Link } from 'react-router-dom';
->>>>>>> 37507c6fd98164cd9f1ce313fcedf61a36c9cfe1
 
 const fetchProducts = async () => {
   const response = await axios.get<IProduct[]>(`http://localhost:3000/products`);
@@ -49,6 +41,18 @@ const ListProduct = () => {
       key: 'description',
     },
     {
+      title: 'Image',
+      dataIndex: 'image',
+      key: 'image',
+      render: (image: string) => (
+        <Image
+          width={100}
+          src={image}
+          alt="Product"
+        />
+      ),
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (record: IProduct) => {
@@ -70,6 +74,9 @@ const ListProduct = () => {
 
   return (
     <div>
+      <Link to={`/admin/product/create`}>
+        <Button type="primary">Create</Button>
+      </Link>
       <Table dataSource={data?.map(item => ({ ...item, key: item.id })) || []} columns={columns} />
     </div>
   );
