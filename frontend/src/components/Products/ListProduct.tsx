@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Table } from 'antd';
+import { Button, Image, Table } from 'antd';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { IProduct } from '../../interface/IProduct';
@@ -41,6 +41,18 @@ const ListProduct = () => {
       key: 'description',
     },
     {
+      title: 'Image',
+      dataIndex: 'image',
+      key: 'image',
+      render: (image: string) => (
+        <Image
+          width={100}
+          src={image}
+          alt="Product"
+        />
+      ),
+    },
+    {
       title: 'Action',
       key: 'action',
       render: (record: IProduct) => {
@@ -51,7 +63,7 @@ const ListProduct = () => {
             </Link>
             <Link to={`/admin/products`}>
               <Button style={{ backgroundColor: "#ff4d4f", color: "white" }}>
-                 Detail
+                Detail
               </Button>
             </Link>
           </>
@@ -62,6 +74,9 @@ const ListProduct = () => {
 
   return (
     <div>
+      <Link to={`/admin/product/create`}>
+        <Button type='primary'>Create</Button>
+      </Link>
       <Table dataSource={data?.map(item => ({ ...item, key: item.id })) || []} columns={columns} />
     </div>
   );
