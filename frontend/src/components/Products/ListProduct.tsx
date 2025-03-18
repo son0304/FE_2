@@ -1,101 +1,78 @@
+<<<<<<< HEAD
 
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Table, Button, Popconfirm, message } from "antd";
 import { IProduct } from "../../interface/IProduct";
+=======
+import React from 'react';
+import { Button, Table } from 'antd';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { IProduct } from '../../interface/IProduct';
+import { Link } from 'react-router-dom';
+>>>>>>> 37507c6fd98164cd9f1ce313fcedf61a36c9cfe1
 
-const ProductList: React.FC = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+const fetchProducts = async () => {
+  const response = await axios.get<IProduct[]>(`http://localhost:3000/products`);
+  return response.data;
+};
 
-  useEffect(() => {
-    fetch("http://localhost:3000/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data));
-  }, []);
+const ListProduct = () => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['products'],
+    queryFn: fetchProducts,
+  });
 
-  const onDelete = (id: string) => {
-    fetch(`http://localhost:3000/products/${id}`, {
-      method: "DELETE",
-    }).then(() => {
-      setProducts(products.filter((item) => item.id !== id));
-      message.success("Xóa sản phẩm thành công!");
-    });
-  };
+  if (isLoading) return <p>...Loading</p>;
+  if (error) return <p>{error.message}</p>;
 
   const columns = [
-
     {
-      title: "Id",//Tên cột
-      dataIndex: "id",//tên biến
-      key: "id",//Value
+      title: 'Id',
+      dataIndex: 'id',
+      key: 'id',
     },
     {
-      title: "Tên sản phẩm",
-      dataIndex: "name",
-      key: "name",
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
-      title: "Giá",
-      dataIndex: "price",
-      key: "price",
-      render: (price: number) => `${price.toLocaleString()} VND`,
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
     },
     {
-      title: "Mô tả",
-      dataIndex: "description",
-      key: "description",
+      title: 'Description',
+      dataIndex: 'description',
+      key: 'description',
     },
     {
-      title: "Hình ảnh",
-      dataIndex: "image",
-      key: "image",
-      render: (image: string) => <img src={image} alt="product" width={50} />,
-    },
-    {
-      title: "Hành động",
-      key: "action",
-      render: (record: IProduct) => (
-        <>
-          <Link to={`/admin/product/detail/${record.id}`}>
-            <Button type="primary" size="small" className="mx-1">
-              Chi tiết
-            </Button>
-          </Link>
-
-          <Popconfirm
-            title="Bạn có chắc chắn muốn xóa sản phẩm này?"
-            onConfirm={() => onDelete(record.id)}
-            okText="Xóa"
-            cancelText="Hủy"
-          >
-            <Button danger size="small" className="mx-1">
-              Xóa
-            </Button>
-          </Popconfirm>
-
-          <Link to={`/admin/product/update/${record.id}`}>
-            <Button type="dashed" size="small" className="mx-1">
-              Cập nhật
-            </Button>
-          </Link>
-        </>
-      ),
+      title: 'Action',
+      key: 'action',
+      render: (record: IProduct) => {
+        return (
+          <>
+            <Link to={`/admin/products/${record.id}`}>
+              <Button type="primary">Update</Button>
+            </Link>
+            <Link to={`/admin/products`}>
+              <Button style={{ backgroundColor: "#ff4d4f", color: "white" }}>
+                 Detail
+              </Button>
+            </Link>
+          </>
+        )
+      }
     },
   ];
 
   return (
-    <div style={{ padding: "20px", maxWidth: "2000px", margin: "0 auto" }}>
-      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>Danh Sách Sản Phẩm</h1>
-
-      <Link to={"/admin/product/create"}>
-        <Button type="primary" style={{ marginBottom: "10px" }}>
-          Thêm Sản Phẩm
-        </Button>
-      </Link>
-
-      <Table dataSource={products} columns={columns} rowKey="id" pagination={{ pageSize: 5 }} />
+    <div>
+      <Table dataSource={data?.map(item => ({ ...item, key: item.id })) || []} columns={columns} />
     </div>
   );
 };
 
-export default ProductList;
+export default ListProduct;
