@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import AppRouter from './assets/router/AppRouter';
+import AppRouter from './router/AppRouter';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();

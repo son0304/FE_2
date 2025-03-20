@@ -38,5 +38,13 @@
       "description": "1234",
       "image": "12345"
     }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "password": "admin",
+      "role": "admin",
+      "id": "1"
+    }
   ]
 }
