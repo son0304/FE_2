@@ -10,7 +10,7 @@ const Sidebar: React.FC = () => {
     {
       key: "dashboard",
       icon: <DashboardOutlined />,
-      label: <Link to="/dashboard">Dashboard</Link>,
+      label: <Link to="/admin/dashboard">Dashboard</Link>,
     },
     {
       key: "user",
