@@ -1,0 +1,48 @@
+import { Button, Form, Input, InputNumber } from "antd";
+import { IProduct } from "../../../interface/IProduct";
+import { useEffect } from "react";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+
+const DetailProduct = () => {
+
+    const { id } = useParams();
+
+    const [form] = Form.useForm();
+
+
+    useEffect(() => {
+        if (id) {
+            axios.get<IProduct>(`http://localhost:3000/products/${id}`)
+                .then(response => {
+                    form.setFieldsValue(response.data);
+                })
+        }
+    }, [id, form]);
+    return (
+        <>
+            <h2>Update Product</h2>
+            <Form layout="vertical" form={form}>
+                <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+                    <Input />
+                </Form.Item>
+                <Form.Item name="price" label="Price" rules={[{ required: true }]}>
+                    <InputNumber />
+                </Form.Item>
+                <Form.Item name="description" label="Description" rules={[{ required: true }]}>
+                    <Input />
+                </Form.Item>
+                <Form.Item name="image" label="Image" rules={[{ required: true }]}>
+                    <Input />
+                </Form.Item>
+                <Form.Item>
+                    <Link to={`/admin/products`}>
+                        <Button type="default" htmlType="submit">Back</Button>
+                    </Link>
+                </Form.Item>
+            </Form>
+        </>
+    )
+}
+
+export default DetailProduct;

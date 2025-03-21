@@ -9,7 +9,11 @@ import ListUser from '../pages/Admin/User/ListUser';
 import CreateUser from '../pages/Admin/User/CreateUser';
 import UpdateUser from '../pages/Admin/User/UpdateUser';
 import DetailUser from '../pages/Admin/User/DetailUser';
-
+import HomeProduct from '../pages/Admin/Product/HomeProduct';
+import ListProduct from '../pages/Admin/Product/ListProduct';
+import CreateProduct from '../pages/Admin/Product/CreateProduct';
+import UpdateProduct from '../pages/Admin/Product/UpdateProduct';
+import DetailProduct from '../pages/Admin/Product/DetailProduct';
 
 const AppRouter = () => {
     return (
@@ -29,7 +33,13 @@ const AppRouter = () => {
                     <Route path="update/:id" element={<UpdateUser />} />
                 </Route>
 
-                
+                {/* Product */}
+                <Route path="products" element={<HomeProduct />}>
+                    <Route index element={<ListProduct />} />
+                    <Route path="create" element={<CreateProduct />} />
+                    <Route path="detail/:id" element={<DetailProduct />} />
+                    <Route path="update/:id" element={<UpdateProduct />} />
+                </Route>
             </Route>
         </Routes>
     );
