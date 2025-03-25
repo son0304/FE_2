@@ -1,6 +1,5 @@
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IProduct } from "../../../interface/IProduct";
-import axios from "axios";
 import { Button, Form, Input, InputNumber, message } from "antd";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ProductApi } from "../../../service/ProductApi";

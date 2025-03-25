@@ -1,9 +1,7 @@
 import { Button, Image, message, Table, TableProps } from "antd";
 import { IProduct } from "../../../interface/IProduct";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { use } from "react";
 import { ProductApi } from "../../../service/ProductApi";
 
 const ListProduct = () => {

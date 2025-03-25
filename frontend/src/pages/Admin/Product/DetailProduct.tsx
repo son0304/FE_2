@@ -1,7 +1,5 @@
 import { Button, Form, Input, InputNumber } from "antd";
-import { IProduct } from "../../../interface/IProduct";
 import { useEffect } from "react";
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { ProductApi } from "../../../service/ProductApi";
 

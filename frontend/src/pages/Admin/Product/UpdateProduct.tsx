@@ -1,8 +1,7 @@
 import { Button, Form, Input, InputNumber } from "antd";
 import { IProduct } from "../../../interface/IProduct";
 import { useEffect } from "react";
-import axios from "axios";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductApi } from "../../../service/ProductApi";
 
