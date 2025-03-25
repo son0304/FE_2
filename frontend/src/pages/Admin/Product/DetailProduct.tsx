@@ -3,6 +3,7 @@ import { IProduct } from "../../../interface/IProduct";
 import { useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import { ProductApi } from "../../../service/ProductApi";
 
 const DetailProduct = () => {
 
@@ -10,14 +11,17 @@ const DetailProduct = () => {
 
     const [form] = Form.useForm();
 
+    const api = new ProductApi();
+
 
     useEffect(() => {
-        if (id) {
-            axios.get<IProduct>(`http://localhost:3000/products/${id}`)
-                .then(response => {
-                    form.setFieldsValue(response.data);
-                })
+        const fetchProduct = async () => {
+            if (id) {
+                const product = await api.getProductById(id);
+                form.setFieldsValue(product);
+            }
         }
+        fetchProduct();
     }, [id, form]);
     return (
         <>

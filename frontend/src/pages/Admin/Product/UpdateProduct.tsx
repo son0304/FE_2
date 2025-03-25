@@ -2,10 +2,13 @@ import { Button, Form, Input, InputNumber } from "antd";
 import { IProduct } from "../../../interface/IProduct";
 import { useEffect } from "react";
 import axios from "axios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import { ProductApi } from "../../../service/ProductApi";
 
 const UpdateProduct = () => {
+
+    const api = new ProductApi();
 
     const query = useQueryClient();
 
@@ -14,33 +17,35 @@ const UpdateProduct = () => {
     const { id } = useParams();
 
     const [form] = Form.useForm();
-    
+
 
     useEffect(() => {
-        if (id) {
-            axios.get<IProduct>(`http://localhost:3000/products/${id}`)
-                .then(response => {
-                    form.setFieldsValue(response.data);
-                })
+        const fetchProduct = async () => {
+            if(id) {
+                const product = await api.getProductById(id);
+                form.setFieldsValue(product);
+            }
         }
+        fetchProduct();
     }, [id, form]);
 
+
+
     const putProduct = async ({ id, newProduct }: { id: any; newProduct: IProduct }) => {
-        await axios.put<IProduct>(`http://localhost:3000/products/${id}`, newProduct, {
-            headers: { "Content-Type": "application/json" },
-        })
+        return await api.putProduct(id, newProduct);
     }
 
-    const {mutate} = useMutation({
+    const { mutate } = useMutation({
         mutationFn: putProduct,
         onSuccess: () => {
+            
             query.invalidateQueries({ queryKey: ['products'] });
             navigate("/admin/products");
         }
     })
 
     const onSubmit = (values: IProduct) => {
-        mutate({id, newProduct: values});
+        mutate({ id, newProduct: values });
     }
     return (
         <>

@@ -4,18 +4,20 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { use } from "react";
+import { ProductApi } from "../../../service/ProductApi";
 
 const ListProduct = () => {
+
+    const api = new ProductApi();
 
     const query = useQueryClient();
 
     const getProduct = async () => {
-        const res = await axios.get<IProduct[]>(`http://localhost:3000/products`);
-        return res.data;
+        return await api.getProducts();
     };
 
-    const deleteProduct = async (id: any) => {
-        await axios.delete(`http://localhost:3000/products/${id}`);
+    const deleteProduct = async (id: string) => {
+        return await api.deleteProduct(id);
     }
 
     const mutation = useMutation({

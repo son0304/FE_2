@@ -3,9 +3,12 @@ import { IProduct } from "../../../interface/IProduct";
 import axios from "axios";
 import { Button, Form, Input, InputNumber, message } from "antd";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ProductApi } from "../../../service/ProductApi";
 
 
 const CreateProduct = () => {
+
+    const api = new ProductApi();
 
     const query = useQueryClient();
 
@@ -14,9 +17,7 @@ const CreateProduct = () => {
     const [form] = Form.useForm();
 
     const newProduct = async(data: IProduct) => {
-        await axios.post(`http://localhost:3000/products`, data, {
-            headers: { "Content-Type": "application/json" },
-        });
+        return api.postProduct(data);
     }
 
     const {mutate} = useMutation({
