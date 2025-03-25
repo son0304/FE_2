@@ -45,6 +45,24 @@
       "password": "admin",
       "role": "admin",
       "id": "1"
+    },
+    {
+      "username": "user",
+      "password": "user",
+      "role": "user",
+      "id": "2"
+    },
+    {
+      "id": "6050",
+      "username": "son0304",
+      "password": "qwe",
+      "role": "user"
+    },
+    {
+      "id": "2c0e",
+      "username": "Sơn",
+      "password": "123",
+      "role": "user"
     }
   ]
 }

@@ -1,22 +1,22 @@
-import axios from "axios";
-import React from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { IUser } from "../../../interface/IUser";
 import { Button, Table, TableProps, message } from "antd";
 import { Link } from "react-router-dom";
+import userApi from "../../../service/UserApi";
+
 
 // Hàm gọi API lấy danh sách user
 const ListUser = () => {
+  const api = new userApi()
   const query = useQueryClient();
 
 
   const getUser = async () => {
-    const res = await axios.get<IUser[]>(`http://localhost:3000/users`);
-    return res.data;
+    return  await api.getUser();
   };
 
   const deleUser = async (id: any) => {
-    await axios.delete(`http://localhost:3000/users/${id}`);
+    return await api.deleteUser(id);
   }
 
   const mutation = useMutation({

@@ -15,17 +15,7 @@ const Sidebar: React.FC = () => {
     {
       key: "user",
       icon: <UserOutlined />,
-      label: "User",
-      children: [
-        {
-          key: "listUser",
-          label: <Link to="/admin/user">Danh sách người dùng</Link>,
-        },
-        {
-          key: "user-settings",
-          label: <Link to="/user-settings">Cài đặt người dùng</Link>,
-        },
-      ],
+      label: <Link to="/admin/user">user</Link>,
     },
     {
       key: "product",

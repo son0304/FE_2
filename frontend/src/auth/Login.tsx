@@ -1,7 +1,6 @@
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Flex } from "antd";
-import { data } from "react-router-dom";
 import { IUser } from "../interface/IUser";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
