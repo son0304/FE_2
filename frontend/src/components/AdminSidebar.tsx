@@ -10,7 +10,7 @@ const Sidebar: React.FC = () => {
     {
       key: "dashboard",
       icon: <DashboardOutlined />,
-      label: <Link to="/dashboard">Dashboard</Link>,
+      label: <Link to="/admin/dashboard">Dashboard</Link>,
     },
     {
       key: "user",
@@ -24,11 +24,11 @@ const Sidebar: React.FC = () => {
       children: [
         {
           key: "product-list",
-          label: <Link to="/products">Danh sách sản phẩm</Link>,
+          label: <Link to="/admin/products">Danh sách sản phẩm</Link>,
         },
         {
           key: "add-product",
-          label: <Link to="/add-product">Thêm sản phẩm</Link>,
+          label: <Link to="/admin/products/create">Thêm sản phẩm</Link>,
         },
       ],
     },

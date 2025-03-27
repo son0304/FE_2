@@ -10,7 +10,14 @@ import ListUser from '../pages/Admin/User/ListUser';
 // import UpdateUser from '../pages/Admin/User/UpdateUser';
 // import DetailUser from '../pages/Admin/User/DetailUser';
 import HomeClient from '../pages/Client/HomeClient'; // Import HomeClient
-import ProductCilent from '../pages/Client/ProductCilent';
+import HomeProduct from '../pages/Admin/Product/HomeProduct';
+import ListProduct from '../pages/Admin/Product/ListProduct';
+import CreateProduct from '../pages/Admin/Product/CreateProduct';
+import DetailProduct from '../pages/Admin/Product/DetailProduct';
+import UpdateProduct from '../pages/Admin/Product/UpdateProduct';
+import ProductClient from '../pages/Client/ProductClient';
+import OrderClient from '../pages/Client/OrderClient';
+
 
 const AppRouter = () => {
     return (
@@ -21,7 +28,8 @@ const AppRouter = () => {
             {/* Client Layout */}
             <Route path="/" element={<Client />}>
                 <Route index element={<HomeClient />} />  
-                <Route path='product' element={<ProductCilent />} />  
+                <Route path='product' element={<ProductClient />} />  
+                <Route path="order" element={<OrderClient />} />
             </Route>
 
             {/* Admin Layout */}
@@ -35,6 +43,15 @@ const AppRouter = () => {
                     <Route path="detail/:id" element={<DetailUser />} />
                     <Route path="update/:id" element={<UpdateUser />} /> */}
                 </Route>
+
+                {/* Product */}
+                <Route path="products" element={<HomeProduct />}>
+                    <Route index element={<ListProduct />} />
+                    <Route path="create" element={<CreateProduct />} />
+                    <Route path="detail/:id" element={<DetailProduct />} />
+                    <Route path="update/:id" element={<UpdateProduct />} />
+                </Route>
+
             </Route>
         </Routes>
     );
