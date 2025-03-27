@@ -1,12 +1,13 @@
 
-import axios from 'axios';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { IUser } from '../../../interface/IUser';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button, Form, Input, Select } from 'antd';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import  userApi  from '../../../service/UserApi';
 
 const UpdateUser = () => {
+  const api = new userApi()
   const query = useQueryClient();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -14,11 +15,10 @@ const UpdateUser = () => {
 
   const putUser = async ({ id, newUser }: { id: any; newUser: IUser }) => {
     try {
-      await axios.put<IUser>(`http://localhost:3000/users/${id}`, newUser, {
-        headers: { "Content-Type": "application/json" },
-      });
+      alert('Update thành công')
+      return await api.putUser(id,newUser)
     } catch (error) {
-      console.error("Error updating user:", error);
+      alert("Error updating user:"+ error);
     }
   };
 
@@ -31,13 +31,13 @@ const UpdateUser = () => {
   });
 
   useEffect(() => {
-    if (id) {
-      axios.get<IUser>(`http://localhost:3000/users/${id}`)
-        .then(response => {
-          form.setFieldsValue(response.data);
-        })
-        .catch(error => console.error("Error fetching user:", error));
+    const fetIdUser = async () => {
+      if (id) {
+        const userId = await api.getUserId(id);
+        form.setFieldsValue(userId);
+      }
     }
+    fetIdUser()
   }, [id, form]);
 
   const onSubmit = (values: IUser) => {

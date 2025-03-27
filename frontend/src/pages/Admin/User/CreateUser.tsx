@@ -1,24 +1,25 @@
-import React from "react";
 import { IUser } from "../../../interface/IUser";
-import axios from "axios";
 import { Form, Input, Select, Button } from "antd";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
+import  userApi  from "../../../service/UserApi";
 
 const CreateUser = () => {
+  const api = new userApi()
   const query = useQueryClient();
   const navigator = useNavigate();
   const [form] = Form.useForm();
 
 
-  
+
   const postUser = async (newUser: IUser) => {
     try {
-      await axios.post<IUser>(`http://localhost:3000/users`, newUser, {
-        headers: { "Content-Type": "application/json" },
-      });
+      alert('Thêm mới thành công')
+      return await api.postUser(newUser);
+
     } catch (error) {
-      console.error("Error creating user:", error);
+      alert('Thêm mới thất bại. Lỗi: ' + error)
+
     }
   };
   const mutation = useMutation({
@@ -83,7 +84,7 @@ const CreateUser = () => {
           <Form.Item>
             <Link to="/admin/user"><Button type="default">Back</Button></Link>
           </Form.Item>
-          
+
 
         </Form>
       </div>

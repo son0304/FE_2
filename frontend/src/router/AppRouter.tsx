@@ -9,17 +9,28 @@ import ListUser from '../pages/Admin/User/ListUser';
 import CreateUser from '../pages/Admin/User/CreateUser';
 import UpdateUser from '../pages/Admin/User/UpdateUser';
 import DetailUser from '../pages/Admin/User/DetailUser';
+import HomeClient from '../pages/Client/HomeClient'; // Import HomeClient
 import HomeProduct from '../pages/Admin/Product/HomeProduct';
 import ListProduct from '../pages/Admin/Product/ListProduct';
 import CreateProduct from '../pages/Admin/Product/CreateProduct';
-import UpdateProduct from '../pages/Admin/Product/UpdateProduct';
 import DetailProduct from '../pages/Admin/Product/DetailProduct';
+import UpdateProduct from '../pages/Admin/Product/UpdateProduct';
+import ProductClient from '../pages/Client/ProductClient';
+import OrderClient from '../pages/Client/OrderClient';
+
 
 const AppRouter = () => {
     return (
         <Routes>
+            {/* Route login riêng */}
             <Route path='/login' element={<Login />} />
-            <Route path='/' element={<Client />} />
+
+            {/* Client Layout */}
+            <Route path="/" element={<Client />}>
+                <Route index element={<HomeClient />} />  
+                <Route path='product' element={<ProductClient />} />  
+                <Route path="order" element={<OrderClient />} />
+            </Route>
 
             {/* Admin Layout */}
             <Route path="/admin" element={<Admin />}>
@@ -29,7 +40,7 @@ const AppRouter = () => {
                 <Route path="user" element={<HomeUser />}>
                     <Route index element={<ListUser />} />
                     <Route path="create" element={<CreateUser />} />
-                    <Route path="detail/:id" element={< DetailUser />} />
+                    <Route path="detail/:id" element={<DetailUser />} />
                     <Route path="update/:id" element={<UpdateUser />} />
                 </Route>
 
@@ -40,6 +51,7 @@ const AppRouter = () => {
                     <Route path="detail/:id" element={<DetailProduct />} />
                     <Route path="update/:id" element={<UpdateProduct />} />
                 </Route>
+
             </Route>
         </Routes>
     );
