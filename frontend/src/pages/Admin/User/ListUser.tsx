@@ -1,38 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { IUser } from "../../../interface/IUser";
 import { Button, Table, TableProps, message } from "antd";
-import { Link } from "react-router-dom";
-import userApi from "../../../service/UserApi";
+import { Link, useNavigate } from "react-router-dom";
+import { useDeleteResource, useListResources } from "../../../Hooks/useResource";
 
 
 // Hàm gọi API lấy danh sách user
 const ListUser = () => {
-  const api = new userApi()
-  const query = useQueryClient();
+  const  navigate = useNavigate();
 
-
-  const getUser = async () => {
-    return  await api.getUser();
-  };
-
-  const deleUser = async (id: any) => {
-    return await api.deleteUser(id);
-  }
-
-  const mutation = useMutation({
-    mutationFn: deleUser,
-    onSuccess: () => {
-      message.success("Xóa thành công")
-      query.invalidateQueries({ queryKey: ['users'] });
-    },
-    onError: () => {
-      message.error("Xóa thất bại")
-    }
-  })
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["users"],
-    queryFn: getUser,
-  });
+  const { data, isLoading, error } = useListResources("users");
+  const mutation = useDeleteResource("users");
 
   if (isLoading) {
     return <p>...Loading</p>;
@@ -41,6 +19,9 @@ const ListUser = () => {
   if (error) {
     return <p>Lỗi: {(error as Error).message}</p>;
   }
+
+  
+
 
   const columns: TableProps<IUser>["columns"] = [
     {
@@ -65,15 +46,15 @@ const ListUser = () => {
       title: "Action",
       key: "action", // ✅ Thêm key
       align: "center",
-      render: (_, user:IUser) => (
+      render: (_, user: IUser) => (
         <>
           <Link to={`/admin/user/update/${user.id}`}>
             <Button type="primary">Update</Button>
           </Link>
 
           <Button danger style={{ marginLeft: 10 }} onClick={() => mutation.mutate(user.id)}>
-        Delete
-      </Button>
+            Delete
+          </Button>
         </>
 
 

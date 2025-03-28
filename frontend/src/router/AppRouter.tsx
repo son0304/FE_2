@@ -6,9 +6,9 @@ import Dashboard from '../pages/Admin/Dashboard';
 import Login from '../auth/Login';
 import HomeUser from '../pages/Admin/User/HomeUser';
 import ListUser from '../pages/Admin/User/ListUser';
-import CreateUser from '../pages/Admin/User/CreateUser';
-import UpdateUser from '../pages/Admin/User/UpdateUser';
-import DetailUser from '../pages/Admin/User/DetailUser';
+// import CreateUser from '../pages/Admin/User/CreateUser';
+// import UpdateUser from '../pages/Admin/User/UpdateUser';
+// import DetailUser from '../pages/Admin/User/DetailUser';
 import HomeClient from '../pages/Client/HomeClient'; // Import HomeClient
 import HomeProduct from '../pages/Admin/Product/HomeProduct';
 import ListProduct from '../pages/Admin/Product/ListProduct';
@@ -39,9 +39,9 @@ const AppRouter = () => {
                 {/* User Management */}
                 <Route path="user" element={<HomeUser />}>
                     <Route index element={<ListUser />} />
-                    <Route path="create" element={<CreateUser />} />
+                    {/* <Route path="create" element={<CreateUser />} />
                     <Route path="detail/:id" element={<DetailUser />} />
-                    <Route path="update/:id" element={<UpdateUser />} />
+                    <Route path="update/:id" element={<UpdateUser />} /> */}
                 </Route>
 
                 {/* Product */}
