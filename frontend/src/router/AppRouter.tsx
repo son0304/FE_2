@@ -17,6 +17,7 @@ import DetailProduct from '../pages/Admin/Product/DetailProduct';
 import UpdateProduct from '../pages/Admin/Product/UpdateProduct';
 import ProductClient from '../pages/Client/ProductClient';
 import OrderClient from '../pages/Client/OrderClient';
+import CartDetail from '../pages/Client/CartDetail';
 
 
 const AppRouter = () => {
@@ -30,6 +31,7 @@ const AppRouter = () => {
                 <Route index element={<HomeClient />} />  
                 <Route path='product' element={<ProductClient />} />  
                 <Route path="order" element={<OrderClient />} />
+                <Route path='cart' element={<CartDetail />} />
             </Route>
 
             {/* Admin Layout */}

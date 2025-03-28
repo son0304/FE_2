@@ -48,35 +48,5 @@
       "role": "user"
     }
   ],
-  "carts": [
-  {
-    "id": "user_1",
-    "user": [
-      {
-        "id": "2c0e",
-        "username": "Sơn",
-        "password": "123",
-        "role": "user"
-      }
-    ],
-    "product": [
-      {
-        "id": "e8ca",
-        "name": "Bánh red velvet sữa chua việt quất",
-        "price": 150000,
-        "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbicc80a-1.jpg&w=1400&q=75",
-        "quantity": 2
-      },
-      {
-        "id": "298d",
-        "name": "Bánh bông lan trứng muối xoài",
-        "price": 150000,
-        "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-bong-lan-trung-muoi-xoai.png&w=1400&q=75",
-        "quantity": 1
-      }
-    ],
-    "totalPrice": 450000
-  }
-]
-
+  "carts": []
 }

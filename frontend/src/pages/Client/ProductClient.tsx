@@ -1,11 +1,15 @@
-import { Button, Image, Row, Col, Card } from "antd";
+import { Button, Image, Row, Col, Card, message } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { IProduct } from "../../interface/IProduct";
 import { useQuery } from "@tanstack/react-query";
 import { ProductApi } from "../../service/ProductApi";
 import { Link } from "react-router-dom";
+import { CartApi } from "../../service/CartApi";
 
 const ProductClient = () => {
+
+  const userId = "2c0e";
+
   const api = new ProductApi();
 
   const getProduct = async () => {
@@ -16,6 +20,21 @@ const ProductClient = () => {
     queryKey: ["products"],
     queryFn: getProduct,
   });
+
+  const addToCart = async (product: IProduct) => {
+    try {
+      await CartApi.addToCart(userId, {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: 1
+      }),
+      message.success(`${product.name} đã được thêm vào giỏ hàng`);
+    } catch {
+      message.error("Err")
+    }
+  }
 
   return (
     <div style={{ padding: "40px", background: "#F8F9FA" }}>
@@ -106,7 +125,7 @@ const ProductClient = () => {
                     Đặt ngay
                   </Button>
                 </Link>
-                <Button
+                <Button onClick={() => addToCart(product)}
                   type="default"
                   icon={<ShoppingCartOutlined />}
                   style={{
