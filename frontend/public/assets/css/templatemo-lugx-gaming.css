@@ -492,6 +492,15 @@ Header Style
   letter-spacing: .25px;
 }
 
+.header-area .main-nav .nav .cart {
+  margin-left: 150px;
+  font-size: 30px;
+  color: white;
+  border-right: 1px solid white;
+
+}
+
+
 .header-area .main-nav .nav li:last-child a {
   background-color: #ee626b;
   text-transform: uppercase;
@@ -505,6 +514,7 @@ Header Style
 .header-area .main-nav .nav li:hover a {
   background-color: rgba(255, 255, 255, 0.10);
 }
+
 .header-area .main-nav .menu-trigger {
   cursor: pointer;
   position: absolute;

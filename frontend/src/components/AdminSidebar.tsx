@@ -32,6 +32,11 @@ const Sidebar: React.FC = () => {
         },
       ],
     },
+    {
+      key: "order",
+      icon: <UserOutlined />,
+      label: <Link to="/admin/order">Order</Link>,
+    },
   ];
 
   return (

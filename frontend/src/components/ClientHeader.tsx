@@ -34,8 +34,8 @@ const ClientHeader = () => {
                 <li><Link to="/" className="active">Home</Link></li>
                 <li><Link to="/product">Products</Link></li>
                 <li><Link to="/product-details">Product Details</Link></li>
-                <li><Link to="/contact">Contact Us</Link></li>
-                <li><Link to="/signin">Sign In</Link></li>
+                <li><Link to="/cart"><i className="fas fa-shopping-cart fa-lg"></i></Link></li>
+                <li><Link to="/login">Sign In</Link></li>
               </ul>
               <a className="menu-trigger">
                 <span>Menu</span>

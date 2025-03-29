@@ -26,26 +26,335 @@
     {
       "username": "admin",
       "password": "admin",
+      "name": "Sơn",
+      "phone": "0123456789",
+      "address": "Hanoi",
       "role": "admin",
       "id": "1"
     },
     {
       "username": "user",
       "password": "user",
+      "name": "Sơn",
+      "phone": "0123456789",
+      "address": "Hanoi",
       "role": "user",
       "id": "2"
     },
     {
-      "id": "6050",
+      "id": "a0dd",
       "username": "son0304",
-      "password": "qwe",
+      "password": "123",
+      "name": "Sơn nhé",
+      "phone": "123456",
+      "address": "Hà Nội",
       "role": "user"
+    }
+  ],
+  "orders": [
+    {
+      "id": "1001",
+      "users": [
+        {
+          "name": "Sơn",
+          "phone": "0123456789",
+          "address": "Hanoi",
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "id": "5ad7",
+          "name": "Bánh kem bơ xoài việt quất",
+          "price": 150000,
+          "description": "Cốt vani và kem bơ, trang trí thêm hoa quả tươi mát gồm xoài và việt quất trên mặt bánh, xem kẽ các bông kem bơ béo ngậy, thơm ngon",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75",
+          "quantity": 2
+        }
+      ],
+      "recipient_name": "Sơn",
+      "phone": "0123456789",
+      "address": "Hanoi",
+      "totalPrice": 450000,
+      "status": "pending",
+      "createdAt": "2025-03-27T10:00:00Z",
+      "date": "2025-03-28",
+      "time": "09:00:00"
+    },
+    {
+      "id": "89f0",
+      "users": [
+        {
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "productId": "5ad7",
+          "name": "Bánh kem bơ xoài việt quất",
+          "price": 150000,
+          "description": "Cốt vani và kem bơ, trang trí thêm hoa quả tươi mát gồm xoài và việt quất trên mặt bánh, xem kẽ các bông kem bơ béo ngậy, thơm ngon",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75",
+          "quantity": 2
+        }
+      ],
+      "recipient_name": "Sơn",
+      "phone": "0587927833",
+      "address": " Mỹ ĐÌnh 1 - Nam Từ Liêm  - Hà Nội",
+      "totalPrice": 300000,
+      "status": "pending",
+      "createdAt": "01:02 29/03/2025",
+      "date": "2025-03-31",
+      "time": "21:06"
+    },
+    {
+      "id": "6ed5",
+      "users": [
+        {
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "productId": "e8ca",
+          "name": "Bánh red velvet sữa chua việt quất",
+          "price": 150000,
+          "description": "Bánh kem cốt red velvet tròn, kem sữa chua, bên trên trang trí 3 quả việt quất",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbicc80a-1.jpg&w=1400&q=75",
+          "quantity": 4
+        }
+      ],
+      "phone": "0587927833",
+      "address": "Đại học Thương Mại",
+      "totalPrice": 600000,
+      "status": "pending",
+      "createdAt": "01:13 29/03/2025",
+      "date": "2025-03-25",
+      "time": "06:00"
+    },
+    {
+      "id": "66f8",
+      "users": [
+        {
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "productId": "e8ca",
+          "name": "Bánh red velvet sữa chua việt quất",
+          "price": 150000,
+          "description": "Bánh kem cốt red velvet tròn, kem sữa chua, bên trên trang trí 3 quả việt quất",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbicc80a-1.jpg&w=1400&q=75",
+          "quantity": 3
+        }
+      ],
+      "phone": "0587927833",
+      "address": "Đại học Thương Mại",
+      "totalPrice": 450000,
+      "status": "pending",
+      "createdAt": "01:15 29/03/2025",
+      "date": "2025-03-31",
+      "time": "05:00"
+    },
+    {
+      "id": "1168",
+      "users": [
+        {
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "productId": "298d",
+          "name": "Bánh bông lan trứng muối xoài",
+          "price": 150000,
+          "description": "Cốt vani, sốt bơ trứng. Trang trí thêm chà bông heo đặc biệt, xoài và trứng muối",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-bong-lan-trung-muoi-xoai.png&w=1400&q=75",
+          "quantity": 1
+        }
+      ],
+      "recipient_name": "C Tâm",
+      "phone": "0587927833",
+      "address": "Đại học Thương Mại",
+      "totalPrice": 150000,
+      "status": "pending",
+      "createdAt": "01:18 29/03/2025",
+      "date": "2025-03-04",
+      "time": "06:00"
+    },
+    {
+      "id": "e5d8",
+      "users": [
+        {
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "productId": "5ad7",
+          "name": "Bánh kem bơ xoài việt quất",
+          "price": 150000,
+          "description": "Cốt vani và kem bơ, trang trí thêm hoa quả tươi mát gồm xoài và việt quất trên mặt bánh, xem kẽ các bông kem bơ béo ngậy, thơm ngon",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75",
+          "quantity": 1
+        }
+      ],
+      "recipient_name": "C S",
+      "phone": "0587927833",
+      "address": "Đại học Thương Mại",
+      "totalPrice": 150000,
+      "status": "pending",
+      "createdAt": "01:18 29/03/2025",
+      "date": "2025-03-31",
+      "time": "07:00"
+    },
+    {
+      "id": "eb0f",
+      "users": [
+        {
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "productId": "e8ca",
+          "name": "Bánh red velvet sữa chua việt quất",
+          "price": 150000,
+          "description": "Bánh kem cốt red velvet tròn, kem sữa chua, bên trên trang trí 3 quả việt quất",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbicc80a-1.jpg&w=1400&q=75",
+          "quantity": 3
+        }
+      ],
+      "recipient_name": "Son",
+      "phone": "0587927833",
+      "address": "Đại học Thương Mại",
+      "totalPrice": 450000,
+      "status": "pending",
+      "createdAt": "09:20 29/03/2025",
+      "date": "2025-03-31",
+      "time": "05:00"
+    },
+    {
+      "id": "b67e",
+      "users": [
+        {
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "productId": "5ad7",
+          "name": "Bánh kem bơ xoài việt quất",
+          "price": 150000,
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75",
+          "quantity": 1
+        }
+      ],
+      "recipient_name": "C Tâm",
+      "phone": "0587927833",
+      "address": "Đại học Thương Mại",
+      "totalPrice": 150000,
+      "status": "pending",
+      "createdAt": "11:16:01 29/3/2025",
+      "date": "2025-03-29",
+      "time": "07:00"
+    },
+    {
+      "id": "b830",
+      "users": [
+        {
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "productId": "5ad7",
+          "name": "Bánh kem bơ xoài việt quất",
+          "price": 150000,
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75",
+          "quantity": 1
+        },
+        {
+          "productId": "5ad7",
+          "name": "Bánh kem bơ xoài việt quất",
+          "price": 150000,
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75",
+          "quantity": 1
+        }
+      ],
+      "recipient_name": "C ",
+      "phone": "0587927833",
+      "address": "Đại học Thương Mại",
+      "totalPrice": 300000,
+      "status": "pending",
+      "createdAt": "11:16:32 29/3/2025",
+      "date": "2025-03-30",
+      "time": "00:07"
+    }
+  ],
+  "carts": [
+    {
+      "id": "2c0e",
+      "users": [
+        {
+          "username": "admin",
+          "password": "admin",
+          "role": "admin",
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "id": "5ad7",
+          "name": "Bánh kem bơ xoài việt quất",
+          "price": 150000,
+          "description": "Cốt vani và kem bơ, trang trí thêm hoa quả tươi mát gồm xoài và việt quất trên mặt bánh, xem kẽ các bông kem bơ béo ngậy, thơm ngon",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75"
+        }
+      ],
+      "totalPrice": 850000
     },
     {
       "id": "2c0e",
-      "username": "Sơn",
-      "password": "123",
-      "role": "user"
+      "users": [
+        {
+          "username": "admin",
+          "password": "admin",
+          "role": "admin",
+          "id": "1"
+        }
+      ],
+      "products": [
+        {
+          "id": "5ad7",
+          "name": "Bánh kem bơ xoài việt quất",
+          "price": 150000,
+          "description": "Cốt vani và kem bơ, trang trí thêm hoa quả tươi mát gồm xoài và việt quất trên mặt bánh, xem kẽ các bông kem bơ béo ngậy, thơm ngon",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75"
+        }
+      ],
+      "totalPrice": 850000
+    }
+  ],
+  "payments": [
+    {
+      "id": "P001",
+      "orderId": "1001",
+      "userId": "2",
+      "amount": 450000,
+      "method": "credit_card",
+      "status": "successful",
+      "paidAt": "2025-03-27T10:05:00Z"
+    },
+    {
+      "id": "P002",
+      "orderId": "1002",
+      "userId": "6050",
+      "amount": 450000,
+      "method": "bank_transfer",
+      "status": "pending",
+      "paidAt": null
     }
   ]
 }

@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteData, getId, getList, postData, putData } from "../service/api";
 import { message } from "antd";
 
-export const useListResources = (resource: string) => {
+export const useListResources = (resource: string) => {  
     return useQuery({
         queryKey: [resource],
         queryFn: () => getList(resource),
@@ -13,7 +13,7 @@ export const useResourceById = (resource: string, id: string) => {
     return useQuery({
         queryKey: [resource, id],
         queryFn: () => getId(resource, id),
-        enabled: !!id, 
+        enabled: !!id,
     });
 };
 
@@ -23,11 +23,11 @@ export const useDeleteResource = (resource: string) => {
     return useMutation({
         mutationFn: (id: string) => deleteData(resource, id),
         onSuccess: () => {
-            message.success("Xóa thành công");
+            alert("Xóa thành công")
             queryClient.invalidateQueries({ queryKey: [resource] });
         },
         onError: () => {
-            message.error("Xóa thất bại");
+           alert("Xóa thất bại");
         },
     });
 };
@@ -38,11 +38,11 @@ export const usePostResource = (resource: string) => {
     return useMutation({
         mutationFn: (values: any) => postData(resource, values),
         onSuccess: () => {
-            message.success("Thêm mới thành công");
+            alert("Thêm mới thành công")
             queryClient.invalidateQueries({ queryKey: [resource] });
         },
         onError: () => {
-            message.error("Thêm mới thất bại");
+            alert("Thêm mới thất bại");
         },
     });
 };
@@ -58,7 +58,7 @@ export const usePutResource = (resource: string) => {
             queryClient.invalidateQueries({ queryKey: [resource] });
         },
         onError: () => {
-            message.error("Cập nhật thất bại");
+           alert("Cập nhật thất bại");
         },
     });
 };
