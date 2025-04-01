@@ -1,9 +1,11 @@
-import React from 'react';
-import { Table, Tag } from 'antd';
-import { useListResources } from '../../../Hooks/useResource';
+import React, { useState } from "react";
+import { Table, Tag } from "antd";
+import { useListResources } from "../../../Hooks/useResource";
 
-const OrderList = () => {
+const OrderList: React.FC = () => {
     const { data, isLoading, error } = useListResources("orders");
+    const [currentPage, setCurrentPage] = useState(1);
+
     if (isLoading) return <p>...Loading</p>;
 
     const columns = [
@@ -58,7 +60,18 @@ const OrderList = () => {
         },
     ];
 
-    return <Table dataSource={data} columns={columns} rowKey="id" />;
+    return (
+        <Table
+            dataSource={data}
+            columns={columns}
+            rowKey="id"
+            pagination={{
+                current: currentPage,
+                pageSize: 4, 
+                onChange: (page) => setCurrentPage(page),
+            }}
+        />
+    );
 };
 
 export default OrderList;
