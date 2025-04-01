@@ -1,41 +1,19 @@
-import { Button, Image, Row, Col, Card, message } from "antd";
+import { Button, Image, Row, Col, Card } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { IProduct } from "../../interface/IProduct";
 import { useQuery } from "@tanstack/react-query";
 import { ProductApi } from "../../service/ProductApi";
-import { Link } from "react-router-dom";
-import { CartApi } from "../../service/CartApi";
+import { Link, useNavigate } from "react-router-dom";
+import { useListResources } from "../../Hooks/useResource";
 
 const ProductClient = () => {
+  const navigate = useNavigate();
+  const { data, isLoading } = useListResources("products");
+  if (isLoading) return <p>...Loading</p>
+  const handleAddToCart = (id: any) => {
+    navigate(`/order` ,{state:{id}});
 
-  const userId = "2c0e";
-
-  const api = new ProductApi();
-
-  const getProduct = async () => {
-    return await api.getProducts();
-  };
-
-  const { data } = useQuery({
-    queryKey: ["products"],
-    queryFn: getProduct,
-  });
-
-  const addToCart = async (product: IProduct) => {
-    try {
-      await CartApi.addToCart(userId, {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        quantity: 1
-      }),
-      message.success(`${product.name} đã được thêm vào giỏ hàng`);
-    } catch {
-      message.error("Err")
-    }
   }
-
   return (
     <div style={{ padding: "40px", background: "#F8F9FA" }}>
       <h2
@@ -108,8 +86,7 @@ const ProductClient = () => {
                 }
               />
               <p
-                style={{
-                  marginTop: "10px",
+                style={{marginTop: "10px",
                   color: "#7F8C8D",
                   fontSize: "14px",
                   minHeight: "40px",
@@ -120,12 +97,12 @@ const ProductClient = () => {
               </p>
               {/* Hai nút trên cùng một hàng */}
               <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
-                <Link to={`/order`} style={{ flex: 1 }}>
-                  <Button type="primary" block style={{ fontSize: "16px", height: "45px" }}>
-                    Đặt ngay
-                  </Button>
-                </Link>
-                <Button onClick={() => addToCart(product)}
+
+                <Button onClick={() => handleAddToCart(product.id)} type="primary" block style={{ fontSize: "16px", height: "45px" }}>
+                  Đặt ngay
+                </Button>
+
+                <Button
                   type="default"
                   icon={<ShoppingCartOutlined />}
                   style={{
