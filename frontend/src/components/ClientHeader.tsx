@@ -52,11 +52,8 @@ const ClientHeader = () => {
                 <li><Link to="/" className="active">Home</Link></li>
                 <li><Link to="/product">Products</Link></li>
                 <li><Link to="/product-details">Product Details</Link></li>
-                <li>
-                  <Link to="/cart">
-                    <i className="fas fa-shopping-cart fa-lg"></i>
-                  </Link>
-                </li>
+                <li><Link to="/cart"><i className="fas fa-shopping-cart fa-lg"></i></Link></li>
+
                 <li>
                   {user ? (
                     <Dropdown menu={userMenu} trigger={["hover"]}>
