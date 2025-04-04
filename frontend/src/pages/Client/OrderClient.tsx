@@ -4,7 +4,7 @@ import { Form, Input, Button, InputNumber, DatePicker, TimePicker, Card, Row, Co
 import { useEffect, useState } from "react";
 
 const OrderClient = () => {
-    const [product, setProduct] = useState<any>([]);
+    const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
     const navigate = useNavigate();
     const location = useLocation();
     const id = location.state?.id;
@@ -12,27 +12,19 @@ const OrderClient = () => {
     const { data } = useResourceById("products", id);
     const [form] = Form.useForm();
     const { mutate: postOrder } = usePostResource("orders");
-    const [quantity, setQuantity] = useState(1);
-    console.log(data);
 
     const productData = dataProduct.length ? dataProduct : data ? [data] : [];
     const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-
     useEffect(() => {
-        if (location.state?.cartItems) {
-            setProduct(location.state.cartItems);
-        } else if (data) {
-            setProduct([{
-                productId: data?.id,
-                name: data?.name,
-                price: data?.price,
-                image: data?.image,
-                quantity: quantity,
-            }]);
-        }
-    }, [location.state?.cartItems, data, quantity]);
-    
+        
+        const quantityObj: { [key: string]: number } = {};
+        productData.forEach((item: any) => {
+            quantityObj[item.id] = item.quantity || 1;
+        });
+        setQuantities(quantityObj);
+    }, [dataProduct, data]);
+
     const onHandleSubmit = (values: any) => {
         const orderData = {
             users: [{ id: user.id, name: user.name, phone: user.phone, address: user.address }],
@@ -41,12 +33,15 @@ const OrderClient = () => {
                 name: item.name,
                 price: item.price,
                 image: item.image,
-                quantity: quantity,
+                quantity: quantities[item.id] || 1,
             })),
             recipient_name: values.name,
             phone: values.phone,
             address: values.address,
-            totalPrice: productData.reduce((sum: any, item: any) => sum + item.price * quantity, 0),
+            totalPrice: productData.reduce((sum: number, item: any) => {
+                const q = quantities[item.id] || 1;
+                return sum + item.price * q;
+            }, 0),
             status: "pending",
             createdAt: new Date().toLocaleString("vi-VN"),
             date: values.date?.format("YYYY-MM-DD"),
@@ -84,8 +79,13 @@ const OrderClient = () => {
                                         <Form.Item label="Số lượng">
                                             <InputNumber
                                                 min={1}
-                                                value={quantity}
-                                                onChange={(value) => setQuantity(value || 1)}
+                                                value={quantities[item.id] || 1}
+                                                onChange={(value) => {
+                                                    setQuantities(prev => ({
+                                                        ...prev,
+                                                        [item.id]: value || 1
+                                                    }));
+                                                }}
                                             />
                                         </Form.Item>
                                     </Col>
@@ -97,13 +97,26 @@ const OrderClient = () => {
                 <Col xs={24} md={12}>
                     <Card title="Thông tin khách hàng" bordered={false}>
                         <Form form={form} layout="vertical" onFinish={onHandleSubmit}>
-                            <Form.Item label="Tên khách hàng" name="name" rules={[{ required: true, message: "Vui lòng nhập tên!" }]}>
+                            <Form.Item
+                                label="Tên khách hàng"
+                                name="name"
+                                rules={[{ required: true, message: "Vui lòng nhập tên!" }]}
+                            >
                                 <Input placeholder="Nhập tên của bạn" />
                             </Form.Item>
-                            <Form.Item label="Số điện thoại" name="phone" initialValue={user.phone} rules={[{ required: true, message: "Vui lòng nhập số điện thoại!" }]}>
+                            <Form.Item
+                                label="Số điện thoại"
+                                name="phone"
+                                initialValue={user.phone}
+                                rules={[{ required: true, message: "Vui lòng nhập số điện thoại!" }]}
+                            >
                                 <Input placeholder="Nhập số điện thoại" />
                             </Form.Item>
-                            <Form.Item label="Địa chỉ" name="address" rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}>
+                            <Form.Item
+                                label="Địa chỉ"
+                                name="address"
+                                rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}
+                            >
                                 <Input placeholder="Nhập địa chỉ nhận hàng" />
                             </Form.Item>
                             <Row gutter={16}>
@@ -113,12 +126,25 @@ const OrderClient = () => {
                                     </Form.Item>
                                 </Col>
                                 <Col span={12}>
-                                    <Form.Item label="Chọn giờ nhận" name="time" rules={[{ required: true, message: "Vui lòng chọn giờ!" }]}>
+                                    <Form.Item
+                                        label="Chọn giờ nhận"
+                                        name="time"
+                                        rules={[{ required: true, message: "Vui lòng chọn giờ!" }]}
+                                    >
                                         <TimePicker format="HH:mm" style={{ width: "100%" }} />
                                     </Form.Item>
                                 </Col>
                             </Row>
-                            <h4 className="fw-bold">Tổng tiền: {productData.reduce((sum: any, item: any) => sum + item.price * quantity, 0).toLocaleString()} VND</h4>
+                            <h4 className="fw-bold">
+                                Tổng tiền:{" "}
+                                {productData
+                                    .reduce((sum: number, item: any) => {
+                                        const q = quantities[item.id] || 1;
+                                        return sum + item.price * q;
+                                    }, 0)
+                                    .toLocaleString()}{" "}
+                                VND
+                            </h4>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit" block>
                                     Đặt hàng ngay
