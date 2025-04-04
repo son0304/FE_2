@@ -51,6 +51,7 @@ const ClientHeader = () => {
               <ul className="nav">
                 <li><Link to="/" className="active">Home</Link></li>
                 <li><Link to="/product">Products</Link></li>
+                <li><Link to="/listOrder">Order</Link></li>
                 <li><Link to="/product-details">Product Details</Link></li>
                 <li>
                   <Link to="/cart">

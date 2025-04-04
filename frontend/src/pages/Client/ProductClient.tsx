@@ -1,18 +1,15 @@
 import { Button, Image, Row, Col, Card } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { IProduct } from "../../interface/IProduct";
-import { useQuery } from "@tanstack/react-query";
-import { ProductApi } from "../../service/ProductApi";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useListResources } from "../../Hooks/useResource";
 
 const ProductClient = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useListResources("products");
   if (isLoading) return <p>...Loading</p>
-  const handleAddToCart = (id: any) => {
-    navigate(`/order` ,{state:{id}});
-
+  const orderNow = (id: any) => {
+    navigate(`/order`, { state: { id } });
   }
   return (
     <div style={{ padding: "40px", background: "#F8F9FA" }}>
@@ -92,14 +89,20 @@ const ProductClient = () => {
                   fontSize: "14px",
                   minHeight: "40px",
                   flexGrow: "1",
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 1, // Giới hạn tối đa 2 dòng
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               >
                 {product.description}
               </p>
+
               {/* Hai nút trên cùng một hàng */}
               <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
 
-                <Button onClick={() => handleAddToCart(product.id)} type="primary" block style={{ fontSize: "16px", height: "45px" }}>
+                <Button onClick={() => orderNow(product.id)} type="primary" block style={{ fontSize: "16px", height: "45px" }}>
                   Đặt ngay
                 </Button>
 

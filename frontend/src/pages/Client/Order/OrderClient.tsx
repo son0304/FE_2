@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { usePostResource, useResourceById } from "../../Hooks/useResource";
+import { usePostResource, useResourceById } from "../../../Hooks/useResource";
 import { Form, Input, Button, InputNumber, DatePicker, TimePicker, Card, Row, Col } from "antd";
 import { useEffect, useState } from "react";
 
@@ -13,7 +13,6 @@ const OrderClient = () => {
     const [form] = Form.useForm();
     const { mutate: postOrder } = usePostResource("orders");
     const [quantity, setQuantity] = useState(1);
-    console.log(data);
 
     const productData = dataProduct.length ? dataProduct : data ? [data] : [];
     const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -32,7 +31,7 @@ const OrderClient = () => {
             }]);
         }
     }, [location.state?.cartItems, data, quantity]);
-    
+
     const onHandleSubmit = (values: any) => {
         const orderData = {
             users: [{ id: user.id, name: user.name, phone: user.phone, address: user.address }],
@@ -54,9 +53,9 @@ const OrderClient = () => {
         };
 
         postOrder(orderData, {
-            onSuccess: () => {
+            onSuccess: (res) => {
                 form.resetFields();
-                navigate("/product");
+                navigate(`/order/detail/${res.id}`);
             },
         });
     };
