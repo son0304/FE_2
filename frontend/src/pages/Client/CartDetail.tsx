@@ -119,6 +119,7 @@ const CartDetail = () => {
                         type="primary"
                         size="large"
                         onClick={onHandleCheckout}
+                        disabled={productCart.length === 0}
                     >
                         Đặt hàng
                     </Button>
