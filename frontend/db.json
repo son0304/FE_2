@@ -209,46 +209,14 @@
   ],
   "carts": [
     {
-      "id": "2c0e",
+      "id": "e32f1f18-b756-4be2-8534-a99b28c23601",
       "users": [
         {
-          "username": "admin",
-          "password": "admin",
-          "role": "admin",
-          "id": "1"
+          "id": "2"
         }
       ],
-      "products": [
-        {
-          "id": "5ad7",
-          "name": "Bánh kem bơ xoài việt quất",
-          "price": 150000,
-          "description": "Cốt vani và kem bơ, trang trí thêm hoa quả tươi mát gồm xoài và việt quất trên mặt bánh, xem kẽ các bông kem bơ béo ngậy, thơm ngon",
-          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75"
-        }
-      ],
-      "totalPrice": 850000
-    },
-    {
-      "id": "2c0e",
-      "users": [
-        {
-          "username": "admin",
-          "password": "admin",
-          "role": "admin",
-          "id": "1"
-        }
-      ],
-      "products": [
-        {
-          "id": "5ad7",
-          "name": "Bánh kem bơ xoài việt quất",
-          "price": 150000,
-          "description": "Cốt vani và kem bơ, trang trí thêm hoa quả tươi mát gồm xoài và việt quất trên mặt bánh, xem kẽ các bông kem bơ béo ngậy, thơm ngon",
-          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75"
-        }
-      ],
-      "totalPrice": 850000
+      "products": [],
+      "totalPrice": 0
     }
   ],
   "payments": [

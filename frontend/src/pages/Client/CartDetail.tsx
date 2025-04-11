@@ -1,7 +1,6 @@
-import React from 'react';
-import { useListResources } from '../../Hooks/useResource';
+import { useListResources, usePutResource } from '../../Hooks/useResource';
 import { useNavigate } from 'react-router-dom';
-import { Button, Card, Image, Space, Table, Typography } from 'antd';
+import { Button, Card, Image, Space, Table, Typography, InputNumber, Popconfirm } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
@@ -9,16 +8,45 @@ const { Title, Text } = Typography;
 const CartDetail = () => {
     const navigate = useNavigate();
     const { data, isLoading } = useListResources("carts");
+    const updateCart = usePutResource("carts");
 
-    const productCart = data?.flatMap((cart: any) => cart.products) || [];
-    const totalPrice = data?.reduce((sum: number, cart: any) => sum + (cart.totalPrice || 0), 0) || 0;
+    const userStorage = localStorage.getItem("user");
+    const userId = userStorage ? JSON.parse(userStorage).id : null;
 
-    console.log(productCart);
+    if (!userId) return <p>Vui lòng đăng nhập</p>;
+
+    const userCart = data?.find((cart: any) => cart.users.some((user: any) => user.id === userId)) || {};
+    const productCart = userCart?.products || [];
+    const totalPrice = productCart.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0);
 
     if (isLoading) return <p>...Loading</p>;
 
     const onHandleCheckout = () => {
         navigate("/order", { state: { cartItems: productCart } });
+    };
+
+    const handleQuantityChange = (value: number, productId: string) => {
+        if (value < 1) {
+            return;
+        }
+
+        const updatedCart = { ...userCart };
+        const productIndex = updatedCart.products.findIndex((p: any) => p.id === productId);
+
+        if (productIndex !== -1) {
+            updatedCart.products[productIndex].quantity = value;
+            updatedCart.totalPrice = updatedCart.products.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0);
+
+            updateCart.mutate({ id: updatedCart.id, values: updatedCart });
+        }
+    };
+
+    const handleRemoveProduct = (productId: string) => {
+        const updatedCart = { ...userCart };
+        updatedCart.products = updatedCart.products.filter((p: any) => p.id !== productId);
+        updatedCart.totalPrice = updatedCart.products.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0);
+
+        updateCart.mutate({ id: updatedCart.id, values: updatedCart });
     };
 
     const columns = [
@@ -43,18 +71,31 @@ const CartDetail = () => {
             title: "Số lượng",
             dataIndex: "quantity",
             key: "quantity",
-            render: (_: any) => 1 
+            render: (quantity: number, record: any) => (
+                <InputNumber
+                    min={1}
+                    value={quantity}
+                    onChange={(value) => handleQuantityChange(value as number, record.id)}
+                />
+            ),
         },
         {
             title: "Tạm tính",
             key: "subtotal",
-            render: (_: any, record: any) => `${record.price.toLocaleString()} VNĐ`
+            render: (_: any, record: any) => `${(record.price * record.quantity).toLocaleString()} VNĐ`
         },
         {
             title: "Hành động",
             key: "action",
-            render: () => (
-                <Button danger icon={<DeleteOutlined />} />
+            render: (_: any, record: any) => (
+                <Popconfirm
+                    title="Bạn có chắc chắn muốn xóa sản phẩm này?"
+                    onConfirm={() => handleRemoveProduct(record.id)}
+                    okText="Xóa"
+                    cancelText="Hủy"
+                >
+                    <Button danger icon={<DeleteOutlined />} />
+                </Popconfirm>
             ),
         },
     ];
@@ -62,7 +103,7 @@ const CartDetail = () => {
     return (
         <div style={{ padding: "20px", maxWidth: "1200px", margin: "auto" }}>
             <Card style={{ textAlign: "center", padding: "20px", width: "100%", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
-                <Title level={2} style={{ textAlign: "center" }}>🛒 Giỏ hàng của bạn</Title>
+                <Title level={2} style={{ textAlign: "center" }}>🛒 Giỏ hàng của {(JSON.parse(localStorage.getItem("user") || "")).name}</Title>
                 <Table
                     dataSource={productCart}
                     columns={columns}
@@ -78,6 +119,7 @@ const CartDetail = () => {
                         type="primary"
                         size="large"
                         onClick={onHandleCheckout}
+                        disabled={productCart.length === 0}
                     >
                         Đặt hàng
                     </Button>
