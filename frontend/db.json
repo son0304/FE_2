@@ -215,8 +215,25 @@
           "id": "2"
         }
       ],
-      "products": [],
-      "totalPrice": 0
+      "products": [
+        {
+          "id": "298d",
+          "name": "Bánh bông lan trứng muối xoài",
+          "price": 150000,
+          "description": "Cốt vani, sốt bơ trứng. Trang trí thêm chà bông heo đặc biệt, xoài và trứng muối",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-bong-lan-trung-muoi-xoai.png&w=1400&q=75",
+          "quantity": 1
+        },
+        {
+          "id": "5ad7",
+          "name": "Bánh kem bơ xoài việt quất",
+          "price": 150000,
+          "description": "Cốt vani và kem bơ, trang trí thêm hoa quả tươi mát gồm xoài và việt quất trên mặt bánh, xem kẽ các bông kem bơ béo ngậy, thơm ngon",
+          "image": "https://www.savor.vn/_next/image?url=https%3A%2F%2Fcms.4handy.vn%2Fapi%2Fmedia%2Ffile%2Fbanh-kem-bo-xoai-viet-quat.jpg&w=1400&q=75",
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 300000
     }
   ],
   "payments": [
