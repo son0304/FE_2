@@ -25,6 +25,7 @@ import OrderList from '../pages/Admin/Order/OrderList';
 import CartDetail from '../pages/Client/CartDetail';
 import OrderDetail from '../pages/Client/Order/OrderDetail';
 import ListOrder from '../pages/Client/Order/ListOrder';
+import OrderDetailAdmin from '../pages/Admin/Order/OrderDetailAdmin';
 
 
 const AppRouter = () => {
@@ -66,6 +67,7 @@ const AppRouter = () => {
                 {/* {Order} */}
                 <Route path="order" element={<HomeOrder />}>
                     <Route index element={<OrderList />} />
+                    <Route path="detail/:id" element={<OrderDetailAdmin />} />
 
                 </Route>
 

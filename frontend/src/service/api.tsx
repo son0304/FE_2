@@ -22,6 +22,12 @@ export const putData = async (resource: string, id: string, values: any)=>{
     return data;
 }
 
+export const patchData = async (resource: string, id: string, values: any) => {
+    const { data } = await axios.patch(`${url}${resource}/${id}`, values);
+    return data;
+  };
+  
+
 export const deleteData = async (resource: string, id: string)=>{
     const {data} = await axios.delete(`${url}${resource}/${id}`);
     return data;
