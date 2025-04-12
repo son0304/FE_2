@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteData, getId, getList, postData, putData } from "../service/api";
+import { deleteData, getId, getList, patchData, postData, putData } from "../service/api";
 import { message } from "antd";
 
 export const useListResources = (resource: string) => {  
@@ -62,3 +62,21 @@ export const usePutResource = (resource: string) => {
         },
     });
 };
+
+
+export const usePatchResource = (resource: string) => {
+    const queryClient = useQueryClient();
+  
+    return useMutation({
+      mutationFn: ({ id, values }: { id: string; values: any }) =>
+        patchData(resource, id, values),
+      onSuccess: () => {
+        message.success("Cập nhật thành công");
+        queryClient.invalidateQueries({ queryKey: [resource] });
+      },
+      onError: () => {
+        alert("Cập nhật thất bại");
+      },
+    });
+  };
+  

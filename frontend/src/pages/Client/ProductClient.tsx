@@ -1,10 +1,8 @@
 import { Button, Image, Row, Col, Card } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { IProduct } from "../../interface/IProduct";
-
 import {  useNavigate } from "react-router-dom";
 import { useListResources, usePostResource, usePutResource } from "../../Hooks/useResource";
-
 const ProductClient = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useListResources("products");
@@ -136,10 +134,16 @@ const ProductClient = () => {
                   fontSize: "14px",
                   minHeight: "40px",
                   flexGrow: "1",
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 1, // Giới hạn tối đa 2 dòng
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               >
                 {product.description}
               </p>
+
               {/* Hai nút trên cùng một hàng */}
               <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
 

@@ -1,23 +1,26 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { usePostResource, useResourceById } from "../../Hooks/useResource";
-import { Form, Input, Button, InputNumber, DatePicker, TimePicker, Card, Row, Col } from "antd";
+import { usePostResource, useResourceById } from "../../../Hooks/useResource";
+import { Form, Input, Button, InputNumber, DatePicker, TimePicker, Card, Row, Col, Radio, Space, QRCode } from "antd";
 import { useEffect, useState } from "react";
 
 const OrderClient = () => {
     const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
     const navigate = useNavigate();
     const location = useLocation();
+    const [paymentMethod, setPaymentMethod] = useState("");
+    const [text, setText] = useState('https://ant.design/');
+
     const id = location.state?.id;
     const dataProduct = location.state?.cartItems || [];
     const { data } = useResourceById("products", id);
     const [form] = Form.useForm();
     const { mutate: postOrder } = usePostResource("orders");
-
     const productData = dataProduct.length ? dataProduct : data ? [data] : [];
     const user = JSON.parse(localStorage.getItem("user") || "{}");
 
     useEffect(() => {
-        
+
+
         const quantityObj: { [key: string]: number } = {};
         productData.forEach((item: any) => {
             quantityObj[item.id] = item.quantity || 1;
@@ -42,16 +45,16 @@ const OrderClient = () => {
                 const q = quantities[item.id] || 1;
                 return sum + item.price * q;
             }, 0),
-            status: "pending",
+            status: "created",
             createdAt: new Date().toLocaleString("vi-VN"),
             date: values.date?.format("YYYY-MM-DD"),
             time: values.time?.format("HH:mm"),
         };
 
         postOrder(orderData, {
-            onSuccess: () => {
+            onSuccess: (res) => {
                 form.resetFields();
-                navigate("/product");
+                navigate(`/order/detail/${res.id}`);
             },
         });
     };
@@ -145,6 +148,48 @@ const OrderClient = () => {
                                     .toLocaleString()}{" "}
                                 VND
                             </h4>
+                            <Form.Item
+                                label="Phương thức thanh toán"
+                                name="paymentMethod"
+                                rules={[{ required: true, message: "Vui lòng chọn phương thức thanh toán!" }]}
+                            >
+                                <Radio.Group onChange={(e) => setPaymentMethod(e.target.value)}>
+                                    <Radio value="COD">Thanh toán khi nhận hàng (COD)</Radio>
+                                    <Radio value="TRANSFER">Chuyển khoản ngân hàng</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                            {paymentMethod === "TRANSFER" && (
+                                <div
+                                    style={{
+                                        marginBottom: 20,
+                                        background: "#f6ffed",
+                                        border: "1px solid #b7eb8f",
+                                        borderRadius: 8,
+                                        padding: 16,
+                                    }}
+                                >
+                                    <h4>Vui lòng chuyển khoản đến:</h4>
+                                    <p>
+                                        <strong>Ngân hàng:</strong> Techcombank
+                                    </p>
+                                    <p>
+                                        <strong>Số tài khoản:</strong> 999913032004
+                                    </p>
+                                    <p>
+                                        <strong>Chủ tài khoản:</strong> CTY TNHH Sweet-Cake
+                                    </p>
+                                    <p>
+                                        <strong>Nội dung chuyển khoản:</strong> {user.name} - {user.phone}
+                                    </p>
+
+                                    <Space direction="vertical" align="center">
+                                        <QRCode value={text || "-"} />
+
+                                    </Space>
+                                </div>
+                            )}
+
+
                             <Form.Item>
                                 <Button type="primary" htmlType="submit" block>
                                     Đặt hàng ngay
@@ -159,3 +204,5 @@ const OrderClient = () => {
 };
 
 export default OrderClient;
+
+

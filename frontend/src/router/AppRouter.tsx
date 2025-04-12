@@ -16,13 +16,16 @@ import CreateProduct from '../pages/Admin/Product/CreateProduct';
 import DetailProduct from '../pages/Admin/Product/DetailProduct';
 import UpdateProduct from '../pages/Admin/Product/UpdateProduct';
 import ProductClient from '../pages/Client/ProductClient';
-import OrderClient from '../pages/Client/OrderClient';
+import OrderClient from '../pages/Client/Order/OrderClient';
 import CreateUser from '../pages/Admin/User/CreateUser';
 import DetailUser from '../pages/Admin/User/DetailUser';
 import UpdateUser from '../pages/Admin/User/UpdateUser';
 import HomeOrder from '../pages/Admin/Order/HomeOrder';
 import OrderList from '../pages/Admin/Order/OrderList';
 import CartDetail from '../pages/Client/CartDetail';
+import OrderDetail from '../pages/Client/Order/OrderDetail';
+import ListOrder from '../pages/Client/Order/ListOrder';
+import OrderDetailAdmin from '../pages/Admin/Order/OrderDetailAdmin';
 
 
 const AppRouter = () => {
@@ -37,6 +40,8 @@ const AppRouter = () => {
                 <Route path='product' element={<ProductClient />} />
                 <Route path='cart' element={<CartDetail />} />
                 <Route path="order" element={<OrderClient />} />
+                <Route path='listOrder' element={<ListOrder/>}/>
+                <Route path="order/detail/:id" element={<OrderDetail />} />
             </Route>
 
             {/* Admin Layout */}
@@ -62,6 +67,8 @@ const AppRouter = () => {
                 {/* {Order} */}
                 <Route path="order" element={<HomeOrder />}>
                     <Route index element={<OrderList />} />
+                    <Route path="detail/:id" element={<OrderDetailAdmin />} />
+
                 </Route>
 
             </Route>

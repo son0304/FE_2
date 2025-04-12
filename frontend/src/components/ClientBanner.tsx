@@ -10,8 +10,7 @@ const ClientBanner = () => {
                         <div className="caption header-text">
                             <h6>Welcome to Sweet-cake</h6>
                             <h2>Sweet Cake – Nâng Tầm Hương Vị, Lan Tỏa Yêu Thương 🎂✨</h2>
-                    
-                            
+
                         </div>
                     </div>
                 </div>
